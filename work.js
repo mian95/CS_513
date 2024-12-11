@@ -1,56 +1,60 @@
-// Profile object 
+// Profile object
 const profile = {
-    name: "Muhammad Umair",
-    age: 20, 
-    hobbies: ["Coding", "Gaming", "Learning Technologies"]
+  name: "Muhammad Umair",
+  age: 20,
+  hobbies: ["Coding", "Gaming", "Learning Technologies"],
 };
 
 // Visibility state
 let isProfileVisible = true;
 
-// Function to toggle profile visibility
-function toggleProfileVisibility() {
-    const profileCard = document.querySelector('.profile-card');
-    isProfileVisible = !isProfileVisible;
-    profileCard.style.display = isProfileVisible ? 'block' : 'none';
+// Fuction to toggle the profile
+toggleProfileVisibility = () => {
+    let profileCard = document.querySelector(".profile-card");
+    profileCard.style.display = isProfileVisible ? "none" : "block";
     
-    // Update button text
-    const toggleButton = document.querySelector('#toggleProfile');
-    toggleButton.textContent = isProfileVisible ? 'Hide Profile' : 'Show Profile';
-}
+    // Updating the button text
+    let toggleButton = document.querySelector("#toggleButton");
+    toggleButton.innerText = isProfileVisible ?  "Show Profile" : "Hide Profile";
 
-// Function to determine age category
-function getAgeCategory() {
-    if (profile.age < 13) return "Child";
-    if (profile.age > 19) return "Teenager";
-    return "Adult";
-}
+  //   to change the boolean value when the fuction call
+  isProfileVisible = !isProfileVisible;
+};
 
-// Initialize the page when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Add hobbies list to profile card
-    const profileCard = document.querySelector('.profile-card');
-    const hobbiesList = document.createElement('ul');
-    hobbiesList.classList.add('hobbies-list');
-    
-    profile.hobbies.forEach(hobby => {
-        const li = document.createElement('li');
-        li.textContent = hobby;
-        hobbiesList.appendChild(li);
-    });
-    
-    profileCard.appendChild(hobbiesList);
-    
-    // Add age category
-    const ageCategory = document.createElement('p');
-    ageCategory.textContent = `Age Category: ${getAgeCategory()}`;
-    ageCategory.classList.add('age-category');
+// Event Listener to add elements
+document.addEventListener("DOMContentLoaded", () => {
+  let profileCard = document.querySelector(".profile-card");
+  let hobbiesList = document.createElement("ul");
+  hobbiesList.classList.add("hobbies-list");
+
+  //   to enter append the hobbies in profile card
+  profile.hobbies.forEach((i) => {
+    let list = document.createElement("li");
+    list.textContent = i;
+    hobbiesList.appendChild(list);
+  });
+  profileCard.appendChild(hobbiesList);
+
+  //   fuction for age catagory
+  let getAgeCategory = () => {
+    let profileCard = document.querySelector(".profile-card");
+    let ageCategory = document.createElement("p");
+    ageCategory.classList.add("age-category");
+    ageCategory.innerText = `Age Catagory : ${
+      profile.age > 18 ? "Adult" : "Teenager"
+    }`;
     profileCard.appendChild(ageCategory);
-    
-    // Add toggle button
-    const toggleButton = document.createElement('button');
-    toggleButton.id = 'toggleProfile';
-    toggleButton.textContent = 'Hide Profile';
-    toggleButton.addEventListener('click', toggleProfileVisibility);
-    document.body.appendChild(toggleButton);
+  };
+
+  getAgeCategory();
+
+  // toggleButton
+  //   const body = document.querySelector("body");
+  const toggleButton = document.createElement("button");
+  toggleButton.innerText = `Hide Profile`;
+
+  toggleButton.id = "toggleButton";
+  document.body.appendChild(toggleButton);
+
+  toggleButton.addEventListener("click", toggleProfileVisibility);
 });
